@@ -25,7 +25,7 @@ This example extracts all page links.
 > wget -qO- http://en.wikipedia.org/wiki/Secure_Shell |./bquery a -a href
 
 Download all zip or exe files from audacity download page
-> wget -qO- http://audacity.sourceforge.net/download/windows |./bquery a -a href|grep 'zip\|exe'|xargs -n1 wget
+> wget -qO- http://audacity.sourceforge.net/download/windows |./bquery a -a href|grep -e zip -e exe|xargs -n1 wget
 
 
 =============================================================================
