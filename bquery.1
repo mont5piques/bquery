@@ -1,0 +1,51 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2013 Adam Cécile (Le_Vert) <gandalf@le-vert.net>,
+.\"
+.TH BQUERY 1 "2014-02-03"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+bquery \- simple tool to quickly parse html streams with a jQuery-like expression
+.SH SYNOPSIS
+.B bquery [ --html ] [ -a <attr> ] <jQuery\-like expression>
+.SH DESCRIPTION
+Simple tool to quickly parse html streams with a
+.B jQuery-like expression.
+.PP
+Note: If the queried element is an input, output will always be value attribute instead of inner text.
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Display usage (help)
+.TP
+.B \-\-html
+Display output in HTML instead of plain text (won't strip HTML inside result)
+.TP
+.B \-a <attr>
+Get attribute <attr> instead of inner text value
+.SH EXAMPLES
+.TP
+.B wget \-qO\- http://en.wikipedia.org/wiki/Secure_Shell | bquery h2
+Return all <h2> elements. Multiple matches = multiple output lines.
+.TP
+.B wget \-qO\- http://en.wikipedia.org/wiki/Secure_Shell | bquery h2:first
+Only first <h2> match. "last" works as well.
+.TP
+.B wget \-qO\- http://en.wikipedia.org/wiki/Secure_Shell | bquery a \-a href
+Extract all links (href) from a page.
+.TP
+.B wget \-qO\- http://audacity.sourceforge.net/download/windows | bquery a \-a href | grep \-e zip \-e exe | xargs \-n1 wget
+Download all "zip" or "exe" files using wget.
+.SH SEE ALSO
+Upstream github:
+.B https://github.com/mont5piques/bquery
