@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import sys
+import argparse
+from pyquery import PyQuery as pq
+from lxml import etree
+
+# Setting argparse
+parser = argparse.ArgumentParser()
+# jQuery expression
+parser.add_argument("expression", help="jQuery expression to apply")
+# HTML output param
+parser.add_argument("--html", help="Set the output as html instead of plain text", action="store_true")
+# get specific attribute
+parser.add_argument("-a", "--attr", help="Get specified attribute instead of text")
+
+args = parser.parse_args()
+
+############################################################
+# READING STDIN
+lines = sys.stdin.read().decode('utf8')
+############################################################
+
+# If not input exit
+if not lines:
+    print 'No input stream'
+    sys.exit(0)
+
+# Setting pyquery object
+d = pq(lines)
+
+
+# Find Corresponding element
+items = d(args.expression)
+
+#Browsing items
+for i in xrange(len(items)):
+    item = items.eq(i)
+    result = ''
+    if item.is_('input'):
+        result = item.val()
+    else:
+        if args.html:
+            result = item.html()
+        elif args.attr:
+            result = item.attr(args.attr)
+        else:
+            result = item.text()
+    if result is not None:
+        try:
+            print result
+        except:
+            print 'Cannot print unicode content, try setting PYTHONIOENCODING to utf-8 using'
+            print 'export PYTHONIOENCODING=utf-8 and retry'
