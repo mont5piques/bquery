@@ -31,6 +31,6 @@ Download all zip or exe files from audacity download page
 =============================================================================
 Installation
 =============================================================================
-bquery requires python, python-pyquery (pyquery with pyquery module)
+bquery requires python, python-pyquery, python-argparse (pyquery with pyquery module)
 
 With python setuptools installed, run "python setup.py install" to install it
