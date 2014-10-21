@@ -33,4 +33,4 @@ Installation
 =============================================================================
 bquery requires python, python-pyquery (pyquery with pyquery module)
 
-run "make install" to install it
+With python setuptools installed, run "python setup.py install" to install it
