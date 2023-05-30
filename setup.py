@@ -13,3 +13,6 @@ setup( \
     scripts=['bquery'],
     install_requires=['pyquery>=1.2'],
 )
+
+# ok faisons ça
+# faisons-ci
